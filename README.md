@@ -38,17 +38,30 @@ WHERE c.Country = 'Brazil'
 
 **4. Provide a query showing only the Employees who are Sales Agents.**
 ```SQL
-
+SELECT 
+* 
+FROM Employee e
+WHERE e.Title = "Sales Support Agent"
 ```
 
 **5. Provide a query showing a unique list of billing countries from the Invoice table.**
 ```SQL
+SELECT DISTINCT
+i.BillingCountry
+FROM Invoice i
 
 ```
 
 **6. Provide a query that shows the invoices associated with each sales agent. The resultant table should include the Sales Agent's full name.**
 ```SQL
-
+SELECT
+e.FirstName || " " || e.LastName AS SalesAgent,
+i.*
+FROM Employee e
+INNER JOIN Customer c ON e.EmployeeID = c.SupportRepId
+INNER JOIN Invoice i ON c.CustomerId = i.CustomerId
+WHERE e.Title = "Sales Support Agent"
+ORDER BY SalesAgent
 ```
 
 **7. Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices and customers.**
