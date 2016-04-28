@@ -66,12 +66,51 @@ ORDER BY SalesAgent
 
 **7. Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices and customers.**
 ```SQL
-
+SELECT
+c.FirstName || " " || c.LastName AS Customer,
+i.Total AS InvoiceTotal,
+i.BillingCountry,
+e.FirstName || " " || e.LastName AS SalesAgent
+FROM Employee e
+INNER JOIN Customer c 
+  ON e.EmployeeID = c.SupportRepId
+INNER JOIN Invoice i 
+  ON c.CustomerId = i.CustomerId
+WHERE e.Title = "Sales Support Agent"
+ORDER BY Customer
 ```
 
 **8. How many Invoices were there in 2009 and 2011? What are the respective total sales for each of those years?(include both the answers and the queries used to find the answers)**
+Number of Invoices in 2009: 83
 ```SQL
+SELECT COUNT 
+(*) 
+FROM Invoice i
+WHERE i.InvoiceDate LIKE "2009%"
+```
 
+Number of Invoices in 2011: 83
+```SQL
+SELECT COUNT 
+(*) 
+FROM Invoice i
+WHERE i.InvoiceDate LIKE "2011%"
+```
+
+Invoice totals for 2009: 449.46
+```SQL
+SELECT 
+sum(Total)
+FROM Invoice i
+WHERE i.InvoiceDate LIKE "2009%"
+```
+
+Invoice totals for 2011: 469.58
+```SQL
+SELECT 
+sum(Total)
+FROM Invoice i
+WHERE i.InvoiceDate LIKE "2011%"
 ```
 
 **9. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.**
