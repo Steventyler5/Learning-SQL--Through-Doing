@@ -115,72 +115,186 @@ WHERE i.InvoiceDate LIKE "2011%"
 
 **9. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.**
 ```SQL
-
+SELECT COUNT
+(InvoiceLineId)
+FROM InvoiceLine
+WHERE InvoiceId = 37
 ```
 
 **10. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for each Invoice. HINT: GROUP BY**
 ```SQL
-
+SELECT
+InvoiceId, 
+COUNT(InvoiceLineId)  AS InvoiceCount
+FROM InvoiceLine
+GROUP BY InvoiceId
 ```
 
 **11. Provide a query that includes the track name with each invoice line item.**
 ```SQL
+SELECT
+il.InvoiceLineId,
+t.Name AS TrackName,
+il.InvoiceId,
+il.TrackId,
+il.UnitPrice,
+il.Quantity
+FROM InvoiceLine il
+INNER JOIN Track t ON il.TrackId = t.TrackId
 
 ```
 
 **12. Provide a query that includes the purchased track name AND artist name with each invoice line item.**
 ```SQL
+SELECT
+il.InvoiceLineId,
+t.Name AS TrackName,
+a.Name AS ArtistName,
+il.InvoiceId,
+il.TrackId,
+il.UnitPrice,
+il.Quantity
+FROM InvoiceLine il
+INNER JOIN Track t ON il.TrackId = t.TrackId
+INNER JOIN Album al ON t.Albumid = al.AlbumId
+INNER JOIN Artist a ON al.ArtistId = a.ArtistId
 
 ```
 
 **13. Provide a query that shows the # of invoices per country. HINT: GROUP BY**
 ```SQL
-
+SELECT
+BillingCountry AS Country,
+COUNT(InvoiceId)  AS InvoiceCount
+FROM Invoice
+GROUP BY Country
 ```
 
 **14. Provide a query that shows the total number of tracks in each playlist. The Playlist name should be include on the resulant table.**
 ```SQL
-
+SELECT
+p.Name AS PlaylistName,
+p.PlaylistId,
+COUNT(pt.TrackId)
+FROM Playlist p
+INNER JOIN PlaylistTrack pt ON p.PlaylistId = pt.Playlistid
+GROUP BY p.PlaylistId
 ```
 
 **15. Provide a query that shows all the Tracks, but displays no IDs. The resultant table should include the Album name, Media type and Genre.**
 ```SQL
-
+SELECT
+t.Name AS TrackName,
+a.Title AS AlbumTitle,
+m.Name AS MediaType,
+g.Name AS Genre
+FROM Track t
+INNER JOIN Album a ON t.AlbumId = a.AlbumId
+INNER JOIN MediaType m ON t.MediaTypeId = m.MediaTypeId
+INNER JOIN Genre g ON t.GenreId = g.GenreId
 ```
 
 **16. Provide a query that shows all Invoices but includes the # of invoice line items.**
 ```SQL
-
+SELECT
+i.*,
+COUNT(il.InvoiceLineId) AS Invoices
+FROM Invoice i
+INNER JOIN InvoiceLine il ON i.InvoiceId = il.InvoiceId
+GROUP BY i.InvoiceId
 ```
 
 **17. Provide a query that shows total sales made by each sales agent.**
 ```SQL
-
+SELECT
+e.FirstName || " " || e.LastName AS SalesAgent,
+SUM(i.Total) AS TotalSales
+FROM Employee e
+INNER JOIN Customer c ON e.EmployeeID = c.SupportRepId
+INNER JOIN Invoice i ON c.CustomerId = i.CustomerId
+WHERE e.Title = "Sales Support Agent"
+GROUP BY SalesAgent
 ```
 
-**18. Which sales agent made the most in sales in 2009? HINT: MAX**
+**18. Which sales agent made the most in sales in 2009? HINT: MAX**<br>
+Highest grossing Sales Agent in 2009: Steve Johnson
 ```SQL
-
+SELECT
+SalesAgent, 
+Max(TotalSales)
+FROM
+(SELECT
+e.FirstName || " " || e.LastName AS SalesAgent,
+SUM(i.Total) AS TotalSales
+FROM Employee e
+INNER JOIN Customer c ON e.EmployeeID = c.SupportRepId
+INNER JOIN Invoice i ON c.CustomerId = i.CustomerId
+WHERE e.Title = "Sales Support Agent" AND i.InvoiceDate LIKE "2009%"
+GROUP BY SalesAgent)
 ```
 
-**19. Which sales agent made the most in sales over all?**
+**19. Which sales agent made the most in sales over all?**<br>
+Highest grossing Sales Agent: Jane Peacock
 ```SQL
-
+SELECT
+SalesAgent, 
+Max(TotalSales)
+FROM
+(SELECT
+e.FirstName || " " || e.LastName AS SalesAgent,
+SUM(i.Total) AS TotalSales
+FROM Employee e
+INNER JOIN Customer c ON e.EmployeeID = c.SupportRepId
+INNER JOIN Invoice i ON c.CustomerId = i.CustomerId
+WHERE e.Title = "Sales Support Agent"
+GROUP BY SalesAgent)
 ```
 
 **20. Provide a query that shows the # of customers assigned to each sales agent.**
 ```SQL
-
+SELECT
+e.FirstName || " " || e.LastName AS SalesAgent,
+COUNT(c.CustomerId) AS TotalCustomers
+FROM Employee e
+INNER JOIN Customer c ON e.EmployeeID = c.SupportRepId
+WHERE e.Title = "Sales Support Agent" 
+GROUP BY c.SupportRepId
 ```
 
-**21. Provide a query that shows the total sales per country. Which country's customers spent the most?**
+**21. Provide a query that shows the total sales per country. Which country's customers spent the most?**<br>
+Sales Total by Country
 ```SQL
+SELECT
+i.BillingCountry AS Country,
+SUM(i.Total) AS TotalSales
+FROM Invoice i
+GROUP BY Country
+```
 
+Country with highest sales total: USA
+```SQL
+SELECT
+Country, 
+Max(TotalSales)
+FROM
+(SELECT
+i.BillingCountry AS Country,
+SUM(i.Total) AS TotalSales
+FROM Invoice i
+GROUP BY Country)
 ```
 
 **22. Provide a query that shows the most purchased track of 2013.**
 ```SQL
-
+SELECT
+t.Name AS Trackname,
+COUNT(il.InvoiceLineId) AS TotalPurchases
+FROM Track t
+INNER JOIN InvoiceLine il ON t.TrackId = il.TrackId
+INNER JOIN Invoice i ON il.InvoiceId = i.InvoiceId
+WHERE i.InvoiceDate LIKE "2013%"
+GROUP BY t.Name
+ORDER BY TotalPurchases DESC
 ```
 
 **23. Provide a query that shows the top 5 most purchased tracks over all.**
