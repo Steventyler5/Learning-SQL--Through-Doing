@@ -12,7 +12,7 @@ c.Country
 FROM Customer c
 WHERE c.Country != 'USA'
 ```
-!(http://i.imgur.com/62QOCt3.png)
+![SQL1](/images/sql1.png)
 
 **2. Provide a query only showing the Customers from Brazil.**
 ```SQL
