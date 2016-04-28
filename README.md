@@ -80,7 +80,7 @@ WHERE e.Title = "Sales Support Agent"
 ORDER BY Customer
 ```
 
-**8. How many Invoices were there in 2009 and 2011? What are the respective total sales for each of those years?(include both the answers and the queries used to find the answers)**
+**8. How many Invoices were there in 2009 and 2011? What are the respective total sales for each of those years?(include both the answers and the queries used to find the answers)**<br>
 Number of Invoices in 2009: 83
 ```SQL
 SELECT COUNT 
