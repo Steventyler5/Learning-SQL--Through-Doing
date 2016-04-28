@@ -299,15 +299,45 @@ ORDER BY TotalPurchases DESC
 
 **23. Provide a query that shows the top 5 most purchased tracks over all.**
 ```SQL
-
+SELECT
+t.Name AS Trackname,
+COUNT(il.InvoiceLineId) AS TotalPurchases
+FROM Track t
+INNER JOIN InvoiceLine il ON t.TrackId = il.TrackId
+INNER JOIN Invoice i ON il.InvoiceId = i.InvoiceId
+WHERE i.InvoiceDate 
+GROUP BY t.Name
+ORDER BY TotalPurchases DESC
+LIMIT 5
 ```
 
 **24. Provide a query that shows the top 3 best selling artists.**
 ```SQL
-
+SELECT
+a.Name AS ArtistName,
+COUNT(il.InvoiceLineId) AS TotalPurchases
+FROM Track t
+INNER JOIN InvoiceLine il ON t.TrackId = il.TrackId
+INNER JOIN Invoice i ON il.InvoiceId = i.InvoiceId
+INNER JOIN Album al ON t.AlbumId = al.AlbumId
+INNER JOIN Artist a ON al.ArtistId = a.ArtistId
+GROUP BY a.Name
+ORDER BY TotalPurchases DESC
+LIMIT 3
 ```
 
 **25. Provide a query that shows the most purchased Media Type.**
 ```SQL
-
+SELECT
+MediaType,
+MAX(TotalPurchases)
+FROM
+(SELECT
+mt.Name AS MediaType,
+COUNT(il.InvoiceLineId) AS TotalPurchases
+FROM Track t
+INNER JOIN InvoiceLine il ON t.TrackId = il.TrackId
+INNER JOIN Invoice i ON il.InvoiceId = i.InvoiceId
+INNER JOIN MediaType mt ON t.MediaTypeId = mt.MediaTypeId
+GROUP BY mt.Name)
 ```
