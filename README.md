@@ -113,7 +113,7 @@ sum(Total)
 FROM Invoice i
 WHERE i.InvoiceDate LIKE "2009%"
 ```
-![SQL1](/images/sql18c.png)
+![SQL1](/images/sql8c.png)
 
 Invoice totals for 2011: 469.58
 ```SQL
