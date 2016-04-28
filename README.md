@@ -12,6 +12,7 @@ c.Country
 FROM Customer c
 WHERE c.Country != 'USA'
 ```
+!http://i.imgur.com/62QOCt3.png
 
 **2. Provide a query only showing the Customers from Brazil.**
 ```SQL
@@ -115,8 +116,8 @@ WHERE i.InvoiceDate LIKE "2011%"
 
 **9. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.**
 ```SQL
-SELECT COUNT
-(InvoiceLineId)
+SELECT 
+COUNT(InvoiceLineId) AS InvoiceCount
 FROM InvoiceLine
 WHERE InvoiceId = 37
 ```
@@ -141,7 +142,6 @@ il.UnitPrice,
 il.Quantity
 FROM InvoiceLine il
 INNER JOIN Track t ON il.TrackId = t.TrackId
-
 ```
 
 **12. Provide a query that includes the purchased track name AND artist name with each invoice line item.**
