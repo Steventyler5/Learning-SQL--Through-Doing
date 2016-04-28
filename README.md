@@ -23,6 +23,7 @@ c.Country
 FROM Customer c
 WHERE c.Country = 'Brazil'
 ```
+![SQL1](/images/sql2.png)
 
 **3. Provide a query showing the Invoices of customers who are from Brazil. The resultant table should show the customer's full name, Invoice ID, Date of the invoice and billing country.**
 ```SQL
@@ -36,6 +37,7 @@ INNER JOIN Invoice i
 ON c.CustomerId = i.CustomerId
 WHERE c.Country = 'Brazil'
 ```
+![SQL1](/images/sql3.png)
 
 **4. Provide a query showing only the Employees who are Sales Agents.**
 ```SQL
@@ -44,6 +46,7 @@ SELECT
 FROM Employee e
 WHERE e.Title = "Sales Support Agent"
 ```
+![SQL1](/images/sql4.png)
 
 **5. Provide a query showing a unique list of billing countries from the Invoice table.**
 ```SQL
@@ -52,6 +55,7 @@ i.BillingCountry
 FROM Invoice i
 
 ```
+![SQL1](/images/sql5.png)
 
 **6. Provide a query that shows the invoices associated with each sales agent. The resultant table should include the Sales Agent's full name.**
 ```SQL
@@ -64,6 +68,7 @@ INNER JOIN Invoice i ON c.CustomerId = i.CustomerId
 WHERE e.Title = "Sales Support Agent"
 ORDER BY SalesAgent
 ```
+![SQL1](/images/sql6.png)
 
 **7. Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices and customers.**
 ```SQL
@@ -80,6 +85,7 @@ INNER JOIN Invoice i
 WHERE e.Title = "Sales Support Agent"
 ORDER BY Customer
 ```
+![SQL1](/images/sql7.png)
 
 **8. How many Invoices were there in 2009 and 2011? What are the respective total sales for each of those years?(include both the answers and the queries used to find the answers)**<br>
 Number of Invoices in 2009: 83
@@ -89,6 +95,7 @@ SELECT COUNT
 FROM Invoice i
 WHERE i.InvoiceDate LIKE "2009%"
 ```
+![SQL1](/images/sql8ab.png)
 
 Number of Invoices in 2011: 83
 ```SQL
@@ -97,6 +104,7 @@ SELECT COUNT
 FROM Invoice i
 WHERE i.InvoiceDate LIKE "2011%"
 ```
+![SQL1](/images/sql8ab.png)
 
 Invoice totals for 2009: 449.46
 ```SQL
@@ -105,6 +113,7 @@ sum(Total)
 FROM Invoice i
 WHERE i.InvoiceDate LIKE "2009%"
 ```
+![SQL1](/images/sql18c.png)
 
 Invoice totals for 2011: 469.58
 ```SQL
@@ -113,6 +122,7 @@ sum(Total)
 FROM Invoice i
 WHERE i.InvoiceDate LIKE "2011%"
 ```
+![SQL1](/images/sql8d.png)
 
 **9. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.**
 ```SQL
@@ -121,6 +131,7 @@ COUNT(InvoiceLineId) AS InvoiceCount
 FROM InvoiceLine
 WHERE InvoiceId = 37
 ```
+![SQL1](/images/sql9.png)
 
 **10. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for each Invoice. HINT: GROUP BY**
 ```SQL
@@ -130,6 +141,7 @@ COUNT(InvoiceLineId)  AS InvoiceCount
 FROM InvoiceLine
 GROUP BY InvoiceId
 ```
+![SQL1](/images/sql10.png)
 
 **11. Provide a query that includes the track name with each invoice line item.**
 ```SQL
@@ -143,6 +155,7 @@ il.Quantity
 FROM InvoiceLine il
 INNER JOIN Track t ON il.TrackId = t.TrackId
 ```
+![SQL1](/images/sql11.png)
 
 **12. Provide a query that includes the purchased track name AND artist name with each invoice line item.**
 ```SQL
