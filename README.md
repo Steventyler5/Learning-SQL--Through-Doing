@@ -39,7 +39,7 @@ WHERE c.Country = 'Brazil'
 ```
 ![SQL1](/images/sql3.png)<br><br>
 
-**4. Provide a query showing only the Employees who are Sales Agents.**
+#####**4. Provide a query showing only the Employees who are Sales Agents.**
 ```SQL
 SELECT 
 * 
