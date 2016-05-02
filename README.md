@@ -3,7 +3,7 @@
 Answers to the exercise found at <br> https://github.com/nashville-software-school/csharp-dotnet-milestones/blob/master/3-database-driven-applications/exercises/database/DBS_SQL_LEARNING-THRU-DOING.md
 
 
-**1. Provide a query showing Customers (just their full names, customer ID and country) who are not in the US.**
+##**1. Provide a query showing Customers (just their full names, customer ID and country) who are not in the US.**
 ```SQL
 SELECT
 c.FirstName || " " || c.LastName AS FullName,
@@ -14,7 +14,7 @@ WHERE c.Country != 'USA'
 ```
 ![SQL1](/images/sql1.png)<br><br>
 
-**2. Provide a query only showing the Customers from Brazil.**
+###**2. Provide a query only showing the Customers from Brazil.**
 ```SQL
 SELECT
 c.FirstName || " " || c.LastName AS FullName,
@@ -25,7 +25,7 @@ WHERE c.Country = 'Brazil'
 ```
 ![SQL1](/images/sql2.png)<br><br>
 
-**3. Provide a query showing the Invoices of customers who are from Brazil. The resultant table should show the customer's full name, Invoice ID, Date of the invoice and billing country.**
+####**3. Provide a query showing the Invoices of customers who are from Brazil. The resultant table should show the customer's full name, Invoice ID, Date of the invoice and billing country.**
 ```SQL
 SELECT
 c.FirstName || " " || c.LastName AS FullName,
